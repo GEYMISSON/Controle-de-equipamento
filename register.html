@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-container">
+    <form id="register-form">
+        <h2>Cadastro</h2>
+
+        <input type="text" id="newUser" placeholder="Usuário" required>
+        <input type="password" id="newPass" placeholder="Senha" required>
+
+        <button type="submit">Cadastrar</button>
+        <p id="message"></p>
+
+        <a href="index.html">Voltar</a>
+    </form>
+</div>
+
+<script>
+document.getElementById('register-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('newUser').value;
+    const password = document.getElementById('newPass').value;
+
+    const res = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    document.getElementById('message').textContent = data.message;
+});
+</script>
+
+</body>
+</html>
