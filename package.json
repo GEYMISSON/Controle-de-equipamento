@@ -4,7 +4,7 @@
   "description": "Sistema de login com Node.js e SQLite",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
