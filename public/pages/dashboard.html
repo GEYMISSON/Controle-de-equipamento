@@ -126,6 +126,8 @@ button { margin-top:5px; padding:5px; cursor:pointer; }
 
 <input id="nomePeca" placeholder="Nome">
 <input id="descPeca" placeholder="Descrição do Produto">
+<input id="marcaPeca" placeholder="Marca do Produto">
+<input id="snumberPeca" placeholder="Serial Number">
 
 <button onclick="cadastrarPeca()">Cadastrar</button>
 
@@ -208,7 +210,13 @@ fetch('/register',{
 method:'POST',
 headers:{'Content-Type':'application/json'},
 body:JSON.stringify({username:novoUsuario.value,password:'1234'})
-}).then(()=>carregarUsuarios());
+})
+.then(()=>{
+    carregarUsuarios();
+
+    // ✅ LIMPAR
+    novoUsuario.value = '';
+});
 }
 
 function editarUsuario(id,username){
@@ -250,7 +258,13 @@ fetch('/setores',{
 method:'POST',
 headers:{'Content-Type':'application/json',Authorization:token},
 body:JSON.stringify({nome:novoSetor.value})
-}).then(()=>carregarSetores());
+})
+.then(()=>{
+    carregarSetores();
+
+    // ✅ LIMPAR
+    novoSetor.value = '';
+});
 }
 
 function editarSetor(id,nome){
@@ -299,7 +313,21 @@ data_acao:dataAcao.value,
 data_atualizacao:dataAtualizacao.value,
 dias_revisao:dias.value
 })
-}).then(()=>carregarChamados());
+})
+.then(()=>{
+    carregarChamados();
+
+    // ✅ LIMPAR CAMPOS
+    tomboSelect.value = '';
+    setorSelect.value = '';
+    usuarioSelect.value = '';
+    mac.value = '';
+    problema.value = '';
+    acao.value = '';
+    dataAcao.value = '';
+    dataAtualizacao.value = '';
+    dias.value = '';
+});
 }
 
 function carregarChamados(){
@@ -339,7 +367,18 @@ memoria:memoria.value,
 armazenamento:armazenamento.value,
 fonte:fonte.value
 })
-}).then(()=>carregarPC());
+})
+.then(()=>{
+    carregarPC();
+
+    // ✅ LIMPAR CAMPOS
+    sistema.value = '';
+    placaMae.value = '';
+    processador.value = '';
+    memoria.value = '';
+    armazenamento.value = '';
+    fonte.value = '';
+});
 }
 
 function carregarPC(){
@@ -372,9 +411,20 @@ method:'POST',
 headers:{'Content-Type':'application/json',Authorization:token},
 body:JSON.stringify({
 nome:nomePeca.value,
-descricao:descPeca.value
+descricao:descPeca.value,
+marca:marcaPeca.value,
+snumber:snumberPeca.value
 })
-}).then(()=>carregarPecas());
+})
+.then(()=>{
+    carregarPecas();
+
+    // ✅ LIMPAR CAMPOS
+    nomePeca.value = '';
+    descPeca.value = '';
+    marcaPeca.value = '';
+    snumberPeca.value = '';
+});
 }
 
 function carregarPecas(){
@@ -385,6 +435,8 @@ listaPecas.innerHTML=d.map(p=>`
 <tr>
 <td>${p.nome}</td>
 <td>${p.descricao}</td>
+<td>${p.marca}</td>
+<td>${p.snumber}</td>
 <td><button onclick="excluirPeca('${p._id}')">❌</button></td>
 </tr>`).join('');
 });

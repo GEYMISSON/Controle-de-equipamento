@@ -84,7 +84,9 @@ const PC = mongoose.model('PC', new mongoose.Schema({
 
 const Peca = mongoose.model('Peca', new mongoose.Schema({
     nome: String,
-    descricao: String
+    descricao: String,
+    marca: String,
+    snumber: String
 }));
 
 //////////////////// FUNÇÕES ////////////////////
